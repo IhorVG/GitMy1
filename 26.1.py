@@ -1,6 +1,10 @@
 import re
 from urllib.request import urlopen
 from urllib.parse import quote
+import math
+
+print(math.sin(0))
+print(math.cos(0))
 
 pRm = r'<p class="date dateFree">(\d{1,2})</p>'
 pDt = r'<p class="date ">(\d{1,2})</p>'
@@ -12,13 +16,13 @@ P_ENC = r'\bcharset=(?P<ENC>.+)\b'
 def getencoding(http_file):
     '''Отримати кодування файлу http_file з Інтернет.'''
     headers = http_file.getheaders()    # отримати заголовки файлу
-   # print(headers)
+
     dct = dict(headers)                 # перетворити у словник
 
     content = dct.get('Content-Type','')# знайти 'Content-Type'
-    #print(content)
+
     mt = re.search(P_ENC, content)      # знайти кодування (після 'charset=' )
-    #print(mt.group())
+
     if mt:
         enc = mt.group('ENC').lower().strip() # виділити кодування
     elif 'html' in content:

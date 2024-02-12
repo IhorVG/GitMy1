@@ -1,10 +1,6 @@
 import re
 from urllib.request import urlopen
 from urllib.parse import quote
-import math
-
-print(math.sin(0))
-print(math.cos(0))
 
 pRm = r'<p class="date dateFree">(\d{1,2})</p>'
 pDt = r'<p class="date ">(\d{1,2})</p>'

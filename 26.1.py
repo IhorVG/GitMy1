@@ -27,7 +27,7 @@ def getencoding(http_file):
         enc = None
     return enc
 
-city='Львів'#input('Яким містом цікавитесь?')
+city=input('Яким містом цікавитесь?')
 
 url = "https://ua.sinoptik.ua/" + quote('погода',encoding='utf-8') + '-' + quote(city,encoding='utf-8')
 

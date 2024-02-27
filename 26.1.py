@@ -1,7 +1,7 @@
 import re
 from urllib.request import urlopen
 from urllib.parse import quote
-#sfsdgsdf
+
 pRm = r'<p class="date dateFree">(\d{1,2})</p>'
 pDt = r'<p class="date ">(\d{1,2})</p>'
 pMh = r'<p class="month">(\w+)</p>'
@@ -16,7 +16,7 @@ def getencoding(http_file):
     dct = dict(headers)                 # перетворити у словник
 
     content = dct.get('Content-Type','')# знайти 'Content-Type'
-
+    print(content)
     mt = re.search(P_ENC, content)      # знайти кодування (після 'charset=' )
 
     if mt:
@@ -27,7 +27,7 @@ def getencoding(http_file):
         enc = None
     return enc
 
-city=input('Яким містом цікавитесь?')
+city='київ'
 
 url = "https://ua.sinoptik.ua/" + quote('погода',encoding='utf-8') + '-' + quote(city,encoding='utf-8')
 
@@ -44,7 +44,6 @@ idd = re.findall(pDt, s)
 ad = idd + dd
 pm = re.findall(pMh, s)
 pt = re.findall(pTr, s)
-
 data = [dd for dd in ad if dd[0]!='0']
 data_with0 = [dd0 for dd0 in ad if dd0[0] == '0']
 list_data = data+data_with0
@@ -54,5 +53,8 @@ pt_min = pt[::2]
 pt_max = pt[1::2]
 
 
-for data, month, min_t, max_t in zip(list_data,pm,pt_min,pt_max):
+sort_l = sorted(zip(list_data, pm, pt_min, pt_max), key=lambda x: x[0])
+
+
+for data, month, min_t, max_t in sort_l:
     print(f"Погода в місті {city} на {data} {month} мінімальна: {min_t}, максимальна: {max_t}")

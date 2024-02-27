@@ -1,5 +1,7 @@
 Тестовий репозиторій
 
+Hello, world! – from remote
+
 Hello all
 
 Hello all
